@@ -5,8 +5,10 @@ import App from 'COMPONENT/App'
 
 import { Router, browserHistory } from 'react-router'
 import {Provider} from 'react-redux'
-import { syncHistoryWithStore } from 'react-router-redux'
+// import { syncHistoryWithStore } from 'react-router-redux'
+import { store, history } from './redux/store'
 import routes from './routes'
+import createDevTools from './createDevtools'
 
 // import moment from 'moment'
 
@@ -30,6 +32,10 @@ import routes from './routes'
 // if (__PROD__) {
 //   console.info('[当前环境] 生产环境')
 // }
+
+
+const initialState = window.__INITIAL_STATE__;
+createDevTools(store)
 
 // ================================
 // 将根组件挂载到 DOM，启动！
