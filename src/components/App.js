@@ -1,33 +1,61 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import { Router } from 'react-router'
-import { store, history } from '../redux/store'
-import routes from '../routes'
+import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import Header from '../components/Header'
+import * as Actions from '../actions'
+import Toaster from '../components/Toaster'
+import ScrollTop from '../components/ScrollTop'
 
-const App = () => (
-  <Provider store={store}>
-    <Router history={history} children={routes} />
-  </Provider>
-)
+const mapStateToProps = state =>{
+  return {
+    globalVal: state.globalVal.toJS(),
+    auth: state.auth.toJS(),
+    showmsg: state.showmsg.toJS()
+  }
+}
 
-export default App
+const mapDispatchToProps = dispatch =>{
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  }
+}
 
-/**
- * 【拓展】
- *  Provider 中传入的属性，可以让全体组件轻松访问，避免繁琐累赘的层层下传。例子：
- *  
- *  class XXX extends Component {
- *    static contextTypes = {
- *      // 组件中需要这样子声明
- *      store: PropTypes.object.isRequired
- *    }
- *    componentDidMount () {
- *      // 之后就可以直接这样用
- *      this.context.store.getState()
- *    }
- *  }
- *  
- *  但上面这种官方的做法实在太麻烦，于是我们有更为直接的方式：
- *  import store from 'STORE'
- *  store.getState() // 注意：此仅为只读，更改 state 只能通过 dispatch
-*/
+@connect(mapStateToProps,mapDispatchToProps)
+export default class App extends Component {
+  constructor(props){
+    super(props)
+  }
+
+  static fetchData(params){
+    return [Actions.getUserInfo(),Actions.getIndexImage()]
+  }
+
+  static propTypes = {
+    globalVal: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+    showmsg: PropTypes.object.isRequired,
+    children: PropTypes.node,
+    actions: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
+  }
+
+  componentWillReceiveProps(nextProps){
+    const { globalVal } = this.props
+    if(globalVal.styleMode !== nextProps.globalVal.styleMode){
+      document.body.className = nextProps.globalVal.styleMode
+    }
+  }
+  
+  render() {
+    const { globalVal,actions,children,auth,location,showmsg } = this.props
+    return (
+      <div>
+        <Header styleMode={globalVal.styleMode} auth={auth} logout={actions.logout} location={location} changeStyleMode={actions.changeStyleMode} />
+        {children}
+        <p>ssssssssssssssssss</p><p>ssssssssssssssssss</p><p>sssss8888888888888888888888888ssssss</p><p>ssssssssssssssssss</p><p>ssssssssssssssssss</p>
+        <Toaster msg={showmsg} hideMsg={actions.hideMsg} />
+        <ScrollTop />
+      </div>
+    )
+  }
+}
