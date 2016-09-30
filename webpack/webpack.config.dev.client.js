@@ -10,7 +10,7 @@ module.exports = {
   debug:true,
   entry: {
     vendor: ['react','redux','react-redux','react-router'],
-    bundle: ['./client.js',hotMiddlewareScript]
+    bundle: ['./app.js',hotMiddlewareScript]
   },
   output: {
     path: path.join(__dirname, '../dist'),

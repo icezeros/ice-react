@@ -9,7 +9,7 @@ module.exports = [
     devtool: "source-map",
     context: path.join(__dirname, "../"),
     entry: {
-      vendor: ['react','redux','react-redux','react-router'],
+      vendor: ['react','redux','react-redux','react-router','react-dom','lodash','moment'],
       bundle: './src/client.js'
     },
     output: {

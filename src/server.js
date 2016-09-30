@@ -4,7 +4,7 @@ import { RouterContext, match, createMemoryHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import reactCookie from 'react-cookie'
 import { fromJS } from 'immutable'
-import configureStore from './store/configureStore'
+import configureStore from './redux/store'
 import routes from './routes'
 import { API_ROOT } from './config'
 

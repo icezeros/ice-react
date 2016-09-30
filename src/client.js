@@ -11,9 +11,13 @@ import 'jackblog-sass/dist/index.css'
 import 'react-s-alert/dist/s-alert-default.css'
 import './assets/styles/index.css'
 import createDevTools from './createDevtools'
+import _ from 'lodash'
+import moment from 'moment'
 
-const initialState = window.__INITIAL_STATE__
-const store = configureStore(initialState,browserHistory)
+_.moment = moment
+
+const initialState = window.__INITIAL_STATE__ || {}
+const store = configureStore(initialState, browserHistory)
 const history = syncHistoryWithStore(browserHistory, store)
 
 createDevTools(store)
@@ -21,7 +25,7 @@ createDevTools(store)
 render(
   <Provider store={store}>
     <Router history={history}>
-      {routes()}
+      {routes() }
     </Router>
   </Provider>,
   document.getElementById('root')
