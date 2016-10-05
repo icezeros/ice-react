@@ -7,7 +7,7 @@ import createLogger from 'redux-logger'
 import {Iterable} from 'immutable'
 import promiseMiddleware from '../../api/promiseMiddleware'
 import DevTools from '../../components/DevTools'
-import rootReducer from '../../reducers'
+import rootReducer from '../reducer'
 
 
 export default function configureStore(initialState, history) {
@@ -39,12 +39,12 @@ export default function configureStore(initialState, history) {
 
   const store = finalCreateStore(createStore)(rootReducer, initialState)
 
-  // if (module.hot) {
-  //   module.hot.accept('../../reducers', () => {
-  //     const nextReducer = require('../../reducers')
-  //     store.replaceReducer(nextReducer)
-  //   })
-  // }
+  if (module.hot) {
+    module.hot.accept('../../reducers', () => {
+      const nextReducer = require('../../reducers')
+      store.replaceReducer(nextReducer)
+    })
+  }
   return store
 }
 

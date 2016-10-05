@@ -32,18 +32,18 @@
       2,
       {"SwitchCase": 1}
     ],
-    "linebreak-style": [
+    "linebreak-style":0 /*[
       "error",
       "windows"
-    ],
+    ]*/,
     "quotes": [
       "error",
       "single"
     ],
-    "semi": [
+    "semi":0 /*[
       "error",
       "never"
-    ],
+    ]*/,
     "no-console": 0,
     "no-unused-vars": 0,//["error", { "vars": "all", "args": "none" }],
     "no-mixed-spaces-and-tabs": [0],
