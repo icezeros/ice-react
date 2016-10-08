@@ -6,11 +6,11 @@ var hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&tim
 module.exports = {
   devtool: 'eval-source-map',
   name: 'browser',
-  context: path.join(__dirname, "..","src"),
-  debug:true,
+  context: path.join(__dirname, "..", "src"),
+  debug: true,
   entry: {
-    vendor: ['react','redux','react-redux','react-router'],
-    bundle: ['./app.js',hotMiddlewareScript]
+    vendor: ['react', 'redux', 'react-redux', 'react-router'],
+    bundle: ['./app.js', hotMiddlewareScript]
   },
   output: {
     path: path.join(__dirname, '../dist'),
@@ -23,7 +23,7 @@ module.exports = {
       __DEVSERVER__: false,
       __DEVTOOLS__: true,
       __DEVLOGGER__: true,
-      'process.env':{
+      'process.env': {
         'NODE_ENV': JSON.stringify('development')
       }
     }),
@@ -37,32 +37,32 @@ module.exports = {
       { test: /\.js$|\.jsx$/, loader: "eslint-loader", exclude: /node_modules/ }
     ],
     loaders: [{
-     test: /\.js$|\.jsx$/,
-     loader: 'babel',
+      test: /\.js$|\.jsx$/,
+      loader: 'babel',
       query: {
-        "presets": ["es2015", "react", "stage-0","react-hmre"],
-        "plugins":["transform-decorators-legacy"]
+        "presets": ["es2015", "react", "stage-0", "react-hmre"],
+        "plugins": ["transform-decorators-legacy"]
       },
       include: path.join(__dirname, '../src'),
       exclude: /node_modules/
-    }, 
-    { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap' ) },
-    { test: /\.json$/, loader: "json-loader" },
-    {
-      test: /\.(jpe?g|png|gif)$/i,
-      loaders: [
-        'url?limit=10000&name=images/[hash:8].[name].[ext]',
-        'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
-      ]
-    },{
-      test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
-    }]
+    },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap') },
+      { test: /\.json$/, loader: "json-loader" },
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        loaders: [
+          'url?limit=10000&name=images/[hash:8].[name].[ext]',
+          'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
+        ]
+      }, {
+        test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url?limit=10000&name=fonts/[hash:8].[name].[ext]'
+      }]
   },
   eslint: {
     configFile: path.join(__dirname, '../.eslintrc.json')
   },
   resolve: {
-    extensions: ['','.js','.jsx','.scss','.css']
+    extensions: ['', '.js', '.jsx', '.scss', '.css']
   }
 }

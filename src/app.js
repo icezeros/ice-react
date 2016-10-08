@@ -6,6 +6,9 @@ import {Provider} from 'react-redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 import routes from './routes'
 import configureStore from './redux/store'
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
 import 'font-awesome/css/font-awesome.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'jackblog-sass/dist/index.css'
@@ -21,6 +24,7 @@ const store = configureStore(initialState, browserHistory)
 const history = syncHistoryWithStore(browserHistory, store)
 
 createDevTools(store)
+injectTapEventPlugin();
 
 render(
   <Provider store={store}>

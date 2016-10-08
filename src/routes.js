@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 import App from './components/App'
+import Setting  from './components/setting'
 // import Home from './components/Home'
 // import Article from './components/Article'
 // import Login from './components/Login'
@@ -10,7 +11,7 @@ import {redirectToBack,redirectToLogin} from './utils/authService'
 
 export default ()=> (
 	<Route path="/" component={App}>
-		
+		<IndexRoute component={Setting}/>
 	</Route>
 )
 
