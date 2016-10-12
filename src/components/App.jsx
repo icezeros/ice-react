@@ -2,16 +2,16 @@
  * @Author: hgs 
  * @Date: 2016-10-04 22:35:52 
  * @Last Modified by: hgs
- * @Last Modified time: 2016-10-09 01:17:14
+ * @Last Modified time: 2016-10-12 22:23:40
  */
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import {AppBar, Paper, RaisedButton, styles} from 'material-ui'
+import { AppBar, Paper, RaisedButton, styles } from 'material-ui'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {grey100, yellow500, blue500} from 'material-ui/styles/colors'
+import { grey100, yellow500, blue500 } from 'material-ui/styles/colors'
 // let {getMuiTheme, MuiThemeProvider, red500, yellow500, blue500} = styles;
 
 
@@ -35,10 +35,11 @@ const mapDispatchToProps = dispatch => {
 export default class App extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      open: false,
+    }
   }
-  state = {
-    open: false,
-  }
+
 
   //   static fetchData(params){
   //     return [Actions.getUserInfo(),Actions.getIndexImage()]
@@ -62,10 +63,10 @@ export default class App extends Component {
   //     }
   //   }
   handleClose() {
-    console.log("======")
+    // console.log("======")
     const {actions} = this.props;
     actions.setDictionary({
-      youDaoSwitch: false,
+      youDaoSwitch: !(this.props.globals.dictionary.youDaoSwitch),
       baiDuSwitch: true,
       googleSwitch: true,
       bingSwitch: true
@@ -123,16 +124,17 @@ export default class App extends Component {
             iconClassNameRight="muidocs-icon-navigation-expand-more"
             style={mStyles.appBar}
             />
-          {children}
 
+          {children}
+          <RaisedButton label="Default"
+            onTouchTap={this.handleClose.bind(this)}
+            />
 
 
           <div style={mStyles.contain}>
 
 
-            <RaisedButton label="Default"
-              onTouchTap={this.handleClose.bind(this) }
-              />
+
             <Paper style={mStyles.paper} zDepth={3} />
 
           </div>
