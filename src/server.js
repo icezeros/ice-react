@@ -10,13 +10,13 @@ import { API_ROOT } from './config'
 
 async function fetchAllData(dispatch, components, params) {
   const needs = components
-      .filter(x=>x.fetchData)
-      .reduce((prev,current)=>{
-        return current.fetchData(params).concat(prev)
-      },[])
-      .map(x=>{
-        return dispatch(x)
-      })
+    .filter(x => x.fetchData)
+    .reduce((prev, current) => {
+      return current.fetchData(params).concat(prev)
+    }, [])
+    .map(x => {
+      return dispatch(x)
+    })
   return await Promise.all(needs)
 }
 
@@ -32,6 +32,8 @@ function renderFullPage(renderedContent, initialState, styleMode) {
       <meta name="description" content="This is Jack Hu's blog. use react redux.">
       <meta name="keyword" content="Jackblog react redux react-router react-redux-router react-bootstrap react-alert">
       <link rel="stylesheet" href="/style.css"/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     </head>
     <body class="${styleMode}">
       <!--[if lt IE 9]>
@@ -53,42 +55,42 @@ export default function render(req, res) {
   const token = reactCookie.load('token') || null
   const styleMode = reactCookie.load('styleMode') || 'day-mode'
   const store = configureStore({
-    auth:fromJS({
+    auth: fromJS({
       token: token,
       user: null
     }),
-    globalVal:fromJS({
+    globalVal: fromJS({
       styleMode: styleMode,
       captchaUrl: API_ROOT + 'users/getCaptcha?'
     })
   }, history)
 
-  match({ routes:routes(), location: req.url }, (error, redirectLocation, renderProps) => {
+  match({ routes: routes(), location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message)
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
       return fetchAllData(store.dispatch, renderProps.components, renderProps.params)
-        .then(html=>{
+        .then(html => {
           const InitialView = (
             <Provider store={store}>
               <RouterContext {...renderProps} />
             </Provider>)
           const componentHTML = renderToString(InitialView)
           const initialState = store.getState()
-          if(__DEVSERVER__){
+          if (__DEVSERVER__) {
             res.set('Content-Type', 'text/html')
             return res.status(200).send(renderFullPage(componentHTML, initialState, styleMode))
-          }else{
-            return res.render('index', {__html__: componentHTML,__state__: JSON.stringify(initialState), __styleMode__: styleMode})
+          } else {
+            return res.render('index', { __html__: componentHTML, __state__: JSON.stringify(initialState), __styleMode__: styleMode })
           }
         }).catch(err => {
-          if(__DEVSERVER__){
+          if (__DEVSERVER__) {
             res.set('Content-Type', 'text/html')
-            return res.status(200).send(renderFullPage('',{}))
-          }else{
-            return res.render('index', {__html__: '',__state__: {}})
+            return res.status(200).send(renderFullPage('', {}))
+          } else {
+            return res.render('index', { __html__: '', __state__: {} })
           }
         })
     } else {

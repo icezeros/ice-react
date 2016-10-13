@@ -2,7 +2,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, browserHistory } from 'react-router'
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import { syncHistoryWithStore } from 'react-router-redux'
 import routes from './routes'
 import configureStore from './redux/store'
@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'jackblog-sass/dist/index.css'
 import 'react-s-alert/dist/s-alert-default.css'
 import './assets/styles/index.css'
+import 'material-design-icons'
 import createDevTools from './createDevtools'
 import _ from 'lodash'
 import moment from 'moment'
@@ -29,7 +30,7 @@ injectTapEventPlugin();
 render(
   <Provider store={store}>
     <Router history={history}>
-      {routes() }
+      {routes()}
     </Router>
   </Provider>,
   document.getElementById('root')
