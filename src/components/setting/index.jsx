@@ -10,7 +10,7 @@ import * as Actions from '../../redux/action'
 
 const mapStateToProps = (state) => {
     return {
-        dictionary: state.globals.toJS().dictionary
+        dictionary: state.globals.dictionary.toJS()
     }
 }
 
@@ -29,21 +29,26 @@ export default class Setting extends Component {
     }
 
     toggleHandle(e) {
-        const {baiDuSwitch, youDaoSwitch, googleSwitch, bingSwitch} = this.refs;
+        // const {baiDuSwitch, youDaoSwitch, googleSwitch, bingSwitch} = this.refs;
         const {actions} = this.props;
-        let dictionary = {
-            youDaoSwitch: youDaoSwitch.state.switched,
-            baiDuSwitch: baiDuSwitch.state.switched,
-            googleSwitch: googleSwitch.state.switched,
-            bingSwitch: bingSwitch.state.switched
-        }
-        console.log(!this.refs[e.target.id].state.switched)
-        dictionary[e.target.id] = !this.refs[e.target.id].state.switched;
-        actions.setDictionary(dictionary)
+        // let dictionary = {
+        //     youDaoSwitch: youDaoSwitch.state.switched,
+        //     baiDuSwitch: baiDuSwitch.state.switched,
+        //     googleSwitch: googleSwitch.state.switched,
+        //     bingSwitch: bingSwitch.state.switched
+        // }
+        // console.log(!this.refs[e.target.id].state.switched)
+        // dictionary[e.target.id] = !this.refs[e.target.id].state.switched;
+        // actions.setDictionary(dictionary)
 
         // console.log(e.target.id)
         // console.log(baiDuSwitch.state.switched)
         // console.log(baiDuSwitch)
+        let dictionary = {
+            key: e.target.id,
+            value: !this.refs[e.target.id].state.switched
+        };
+        actions.setDictionary(dictionary)
 
 
     }

@@ -2,7 +2,7 @@
  * @Author: hgs 
  * @Date: 2016-10-04 22:35:52 
  * @Last Modified by: hgs
- * @Last Modified time: 2016-10-12 22:23:40
+ * @Last Modified time: 2016-10-13 14:32:19
  */
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
@@ -19,7 +19,7 @@ import * as Actions from '../redux/action'
 
 const mapStateToProps = state => {
   return {
-    globals: state.globals.toJS(),
+    globals: state.globals,
     // auth: state.auth.toJS(),
     // showmsg: state.showmsg.toJS()
   }
