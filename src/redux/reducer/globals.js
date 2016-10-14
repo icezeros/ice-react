@@ -2,7 +2,7 @@
  * @Author: hgs 
  * @Date: 2016-10-07 16:30:37 
  * @Last Modified by: hgs
- * @Last Modified time: 2016-10-13 14:28:15
+ * @Last Modified time: 2016-10-14 10:30:02
  */
 import { createReducer } from 'redux-immutablejs'
 import { fromJS } from 'immutable'
@@ -13,7 +13,7 @@ import { SET_DICTIONARY } from '../types'
 
 const initialStateDic = fromJS({
 
-    youDaoSwitch: true,
+    youDaoSwitch: false,
     baiDuSwitch: true,
     googleSwitch: true,
     bingSwitch: true

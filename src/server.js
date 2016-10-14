@@ -62,6 +62,12 @@ export default function render(req, res) {
     globalVal: fromJS({
       styleMode: styleMode,
       captchaUrl: API_ROOT + 'users/getCaptcha?'
+    }),
+    dictionary: fromJS({
+      youDaoSwitch: false,
+      baiDuSwitch: true,
+      googleSwitch: true,
+      bingSwitch: true
     })
   }, history)
 
